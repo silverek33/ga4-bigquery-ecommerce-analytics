@@ -62,12 +62,13 @@ The final solution covers:
 
 The repository contains SQL logic used to build the reporting layer:
 
-- `fact_events.sql` – flattened base layer for selected GA4 event attributes
-- `funnel_steps.sql` – funnel step mapping for ecommerce events
-- `funnel_users.sql` – unique users reaching each funnel stage
-- `funnel_steps_cr.sql` – conversion rate logic between funnel stages
-- `product_performance.sql` – product-level performance metrics
-
+- `fact_events.sql` – flattened GA4 event layer with session, page and device information
+- `purchases.sql` – purchase-level extract with transaction ID and revenue
+- `funnel_users.sql` – user-level flags showing which funnel stages were reached
+- `funnel_users_segmented.sql` – funnel flags segmented by device category
+- `funnel_steps.sql` – unique user counts at each funnel stage
+- `funnel_steps_cr.sql` – conversion rate calculation between funnel stages
+- `product_performance.sql` – product-level views, carts, checkout starts and purchases
 ---
 
 ## Business Value

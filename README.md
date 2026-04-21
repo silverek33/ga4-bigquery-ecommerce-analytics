@@ -2,127 +2,103 @@
 
 End-to-end analytics project based on Google Analytics 4 ecommerce event data, transformed in BigQuery using SQL and visualised in Looker Studio.
 
-The project focuses on turning raw nested GA4 data into a clean analytical layer that supports:
-- traffic analysis
-- event behaviour tracking
+The goal of the project was to turn raw, nested GA4 event data into a business-friendly analytical layer that supports:
+- traffic and event analysis
 - ecommerce funnel monitoring
-- product-level conversion insights
+- conversion tracking
+- product-level performance evaluation
 
 ---
 
-## 🔍 Live Dashboard
+## Live Dashboard
 
-👉 https://datastudio.google.com/reporting/0419a67c-e7ed-47e3-95c0-5dae11c45791/page/tEnnC
+Open the interactive dashboard here:
 
----
-
-## ⚙️ Tech Stack
-
-- Google Analytics 4 (event data)
-- BigQuery (data warehouse)
-- SQL (data transformation)
-- Looker Studio (data visualisation)
+[View Looker Studio Dashboard](https://datastudio.google.com/reporting/0419a67c-e7ed-47e3-95c0-5dae11c45791/page/tEnnC)
 
 ---
 
-## 🧱 Architecture
+## Tech Stack
 
-GA4 raw events → BigQuery → SQL transformation layer → Looker Studio dashboard
-
-The transformation layer is built using SQL views that structure event-based data into business-friendly entities.
-
----
-
-## 📊 Data Model
-
-The project uses GA4 public dataset:
-bigquery-public-data.ga4_obfuscated_sample_ecommerce
-
-Key challenge:
-- GA4 data is nested (event_params)
-- requires flattening and transformation
+- Google Analytics 4
+- BigQuery
+- SQL
+- Looker Studio
 
 ---
 
-## 🧩 SQL Layer Overview
+## Architecture
 
-### 1. fact_events.sql
+GA4 raw ecommerce events → BigQuery → SQL transformation layer → Looker Studio dashboard
 
-Creates a flattened base table from GA4 events.
-
-Includes:
-- event_name
-- session_id
-- page location
-- engagement metrics
-
-Used as foundation for all further analysis.
+The project uses a reporting layer built with SQL views to convert nested event data into structured entities for analysis and visualisation.
 
 ---
 
-### 2. funnel_steps.sql
+## Source Data
 
-Defines ecommerce funnel steps:
-- view_item
-- add_to_cart
-- begin_checkout
-- purchase
+This project uses the public GA4 ecommerce dataset available in BigQuery:
 
-Aggregates user actions per step.
+`bigquery-public-data.ga4_obfuscated_sample_ecommerce`
+
+The main challenge of this dataset is its nested structure, especially the use of `event_params`, which requires extraction and flattening logic through SQL.
 
 ---
 
-### 3. funnel_users.sql
+## Project Scope
 
-Tracks unique users per funnel stage.
+The final solution covers:
 
-Used to:
-- measure drop-offs
-- analyse user progression
-
----
-
-### 4. funnel_steps_cr.sql
-
-Calculates conversion rates between steps.
-
-Example:
-- view_item → add_to_cart
-- add_to_cart → purchase
+- overview KPIs
+- event distribution
+- page-level activity
+- ecommerce funnel analysis
+- conversion rate logic
+- product performance analysis
 
 ---
 
-### 5. product_performance.sql
+## SQL Layer
 
-Analyses product-level performance:
-- views
-- add_to_cart
-- purchases
-- cart-to-purchase rate
+The repository contains SQL logic used to build the reporting layer:
 
----
-
-## 📈 Business Insights
-
-The dashboard allows:
-- identification of funnel drop-off points
-- evaluation of checkout efficiency
-- comparison of product conversion performance
-- understanding of user behaviour patterns
+- `fact_events.sql` – flattened base layer for selected GA4 event attributes
+- `funnel_steps.sql` – funnel step mapping for ecommerce events
+- `funnel_users.sql` – unique users reaching each funnel stage
+- `funnel_steps_cr.sql` – conversion rate logic between funnel stages
+- `product_performance.sql` – product-level performance metrics
 
 ---
 
-## 🧠 What this project demonstrates
+## Business Value
+
+This project demonstrates how raw GA4 ecommerce data can be transformed into a structured analytical model that helps answer business questions such as:
+
+- Where do users drop off in the funnel?
+- How efficient is the checkout process?
+- Which products get attention but do not convert?
+- How do user actions translate into purchases?
+
+---
+
+## What This Project Demonstrates
 
 - ability to work with real event-based analytics data
-- strong SQL transformation skills
-- understanding of GA4 data structure
-- building a full analytics pipeline (data → warehouse → dashboard)
-- translating technical data into business insights
+- SQL transformation skills in BigQuery
+- understanding of nested GA4 structure
+- building an analytics pipeline from source data to dashboard
+- translating technical data into business-oriented reporting
 
 ---
 
-## 🚀 Author
+## Repository Notes
 
-Sylwester Kuźma  
-Data / SAP / IT  
+The SQL files in this repository represent the transformation logic used to build the reporting layer.  
+If needed, they can be adapted into views or tables in a BigQuery dataset.
+
+---
+
+## Author
+
+**Sylwester Kuźma**  
+Data / SAP / IT
